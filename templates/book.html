@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+BookReview | {{ book.title }}
+{% endblock %}
+
+{% block body %}
+<form action="{{ url_for('signout') }}", method="post"><button class="logout">Log out</button></form>
+<h1 class="pagehead">Book Details</h1>
+<table>
+    <tr>
+        <th>ISBN</th>
+        <td>{{ book.isbn }}</td>
+    </tr>
+    <tr>
+        <th>Title</th>
+        <td>{{ book.title }}</td>
+    </tr>
+    <tr>
+        <th>Author</th>
+        <td>{{ book.author }}</td>
+    </tr>
+    <tr>
+        <th>Year</th>
+        <td>{{ book.year }}</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Reviews on {{ book.title }}</th>
+    </tr>
+
+    {% for review in reviews %}
+        <tr>
+            <td>
+                <span><h4 class="commentuser">{{ review.username }}</h3> <h4 class="commentscore">Score: {{ review.score }}</h4></span>
+                <p class="review"> {{ review.review }}</p>
+            </td>
+        </tr>
+    {% else %}
+        <td><h5>No reviews for this book.</h5></td>
+    {% endfor %}
+    <tr>
+        <td>
+            <form id="review" class="commentbox" action="{{ url_for('book', book_id=book.id ) }}" method="post">
+                <h3>Leave a Review</h3>
+                <textarea id="enterreview" rows="5" cols="50" name="review" form="review" placeholder="Your review for this book" required></textarea>
+                <div id="sendreview">
+                    <span>
+                        <label for="score"></label>
+                        <select name="score" id="score">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                        <input type="submit">
+                    </span>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+{% endblock %}

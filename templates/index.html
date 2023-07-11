@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+BookReview | Sign Up
+{% endblock %}
+
+{% block body %}
+<div class="modal">
+  <form id="signup" class="modal-content animate" action="{{ url_for('signup') }}", method="post">
+    <h1 class= "formhead">BookReview</h1>
+    <h1 class= "formhead">Sign Up</h1>
+    <div class="imgcontainer">
+      <img src="static/img/avatar.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input id="pass" type="password" placeholder="Enter Password" name="psw" required>
+      <button class="enter">Sign Up</button>
+      <p>Already have an account? <a href="/login">Sign In</a></p>
+    </div>
+  </form>
+</div> 
+{% endblock %}
+

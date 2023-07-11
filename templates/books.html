@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+BookReview | Books
+{% endblock %}
+
+{% block body %}
+<div class="topnav">
+    <div class="search-container">
+      <form action="{{ url_for('books') }}", method="post">
+        <input type="text" placeholder="ISBN" name="isbn">
+        <input type="text" placeholder="Title" name="title">
+        <input type="text" placeholder="Author" name="author">
+        <input type="number" placeholder="Year" name="year">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+</div>
+
+<form action="{{ url_for('signout') }} ", method="post"><button class="logout">Log out</button></form>
+<h1 class="pagehead">Books</h1>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Details</th>
+    </tr>
+
+    {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td><a href="{{ url_for('book', book_id=book.id) }}">View Details</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}
